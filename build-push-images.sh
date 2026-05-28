@@ -62,7 +62,7 @@ check_prerequisites() {
 
 build_db() {
   log "========== WebODM DB =========="
-  docker_build "${WEBODM_DIR}/db" Dockerfile -t "${IMG_DB}"
+  docker_build "${WEBODM_DIR}/db" "${WEBODM_DIR}/db/Dockerfile" -t "${IMG_DB}"
   if [[ "${PUSH}" == "1" ]]; then
     docker_push "${IMG_DB}"
   fi
@@ -71,7 +71,7 @@ build_db() {
 
 build_webapp() {
   log "========== WebODM Webapp =========="
-  docker_build "${WEBODM_DIR}" Dockerfile -t "${IMG_APP}"
+  docker_build "${WEBODM_DIR}" "${WEBODM_DIR}/Dockerfile" -t "${IMG_APP}"
   if [[ "${PUSH}" == "1" ]]; then
     docker_push "${IMG_APP}"
   fi
