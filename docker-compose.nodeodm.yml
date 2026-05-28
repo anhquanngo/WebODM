@@ -10,7 +10,7 @@ services:
     environment:
       - WO_DEFAULT_NODES
   node-odx-1:
-    image: webodm/nodeodx
+    image: ${WO_DOCKER_USER:-anhquan01}/nodeodx:${WO_NODE_CPU_TAG:-cpu}
     container_name: node-odx-1
     expose:
       - "3000"
