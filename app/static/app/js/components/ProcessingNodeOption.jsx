@@ -8,6 +8,17 @@ const warnings = {
     'ignore-gsd': _("You might run out of memory if you use this option.")
 };
 
+const optionDisplayNames = {
+    'sfm-engine': _("SfM Engine")
+};
+
+const enumLabels = {
+    'sfm-engine': {
+        'opensfm': 'OpenSfM',
+        'colmap': 'COLMAP (GPU)'
+    }
+};
+
 class ProcessingNodeOption extends React.Component {
   static defaultProps = {};
 
@@ -130,9 +141,11 @@ class ProcessingNodeOption extends React.Component {
               className="form-control"
               value={selectValue}
               onChange={this.handleSelectChange}>
-                {this.props.domain.map(val => 
-                  <option value={val} key={val}>{val}</option>
-                )}
+                {this.props.domain.map(val => {
+                  const labels = enumLabels[this.props.name];
+                  const label = labels && labels[val] ? labels[val] : val;
+                  return <option value={val} key={val}>{label}</option>;
+                })}
             </select>
           );
       }else{
@@ -173,11 +186,18 @@ class ProcessingNodeOption extends React.Component {
         warningMsg = (<div class="alert alert-warning">
                 <i class="fa fa-exclamation-triangle"></i> {warnings[this.props.name]}
             </div>);
+  }else if (this.props.name === 'sfm-engine'){
+        const engine = this.state.value !== "" ? this.state.value : this.props.defaultValue;
+        if (engine === 'colmap'){
+            warningMsg = (<div class="alert alert-warning">
+                    <i class="fa fa-exclamation-triangle"></i> {_("COLMAP requires a GPU-enabled processing node (nodeodx:gpu-colmap).")}
+                </div>);
+        }
     }
 
     return (
       <div className="processing-node-option form-inline form-group form-horizontal" ref={this.setTooltips}>
-        <label>{this.props.name} {(!this.isEnumType() && this.props.domain ? `(${this.props.domain})` : "")} <i data-toggle="tooltip" data-placement="bottom" title={this.props.help} onClick={this.handleHelp} className="fa fa-info-circle info-button help-button"></i></label><br/>
+        <label>{optionDisplayNames[this.props.name] || this.props.name} {(!this.isEnumType() && this.props.domain ? `(${this.props.domain})` : "")} <i data-toggle="tooltip" data-placement="bottom" title={this.props.help} onClick={this.handleHelp} className="fa fa-info-circle info-button help-button"></i></label><br/>
         {inputControl}
         {loadFileControl}
         

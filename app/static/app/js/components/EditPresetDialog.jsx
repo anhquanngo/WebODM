@@ -48,6 +48,7 @@ const OPTS_GROUPS = [
         name: _('Structure From Motion'),
         icon: 'fa fa-camera',
         subgroups: [
+            { id: 'sfm-backend', name: _('SfM Engine') },
             { id: 'feature-extraction', name: _('Feature Extraction') },
             { id: 'feature-matching', name: _('Feature Matching') },
             { id: 'sparse-reconstruction', name: _('Reconstruction') },
@@ -161,6 +162,8 @@ const OPTION_GROUP_MAP = {
     'sm-no-align': { group: 'split-merge', subgroup: 'merging' },
     
     // Structure from Motion
+    'sfm-engine': { group: 'sfm', subgroup: 'sfm-backend' },
+
     'feature-type': { group: 'sfm', subgroup: 'feature-extraction' },
     'feature-quality': { group: 'sfm', subgroup: 'feature-extraction' },
     'min-num-features': { group: 'sfm', subgroup: 'feature-extraction' },
