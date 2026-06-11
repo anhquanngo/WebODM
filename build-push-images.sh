@@ -96,7 +96,7 @@ print_summary() {
   echo "  WO_IMAGE_TAG=webapp"
   echo "  WO_DB_IMAGE_TAG=db"
   echo "  WO_NODE_CPU_TAG=cpu"
-  echo "  WO_NODE_GPU_TAG=gpu"
+  echo "  WO_NODE_GPU_TAG=gpu-colmap"
   echo ""
   echo "Start WebODM + NodeODX (GPU):"
   echo "  cd ${WEBODM_DIR}"
@@ -106,7 +106,7 @@ print_summary() {
   echo "  docker pull ${IMG_DB}"
   echo "  docker pull ${IMG_APP}"
   echo "  docker pull ${DOCKER_USER}/nodeodx:cpu"
-  echo "  docker pull ${DOCKER_USER}/nodeodx:gpu"
+  echo "  docker pull ${DOCKER_USER}/nodeodx:gpu-colmap"
 }
 
 main() {
